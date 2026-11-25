@@ -27,7 +27,7 @@ def _prompt(p) -> dict:
     counts = scoring.prior_counts(p)
     out = _preloaded_prompt(PromptPreview(p, counts, 0))
     # The server shuffles the deep cuts it reveals; seed it so the generated file is stable.
-    out["play"].update(scoring.reveal(counts, 0, random.Random(p.id)))
+    out["play"].update(scoring.reveal(counts, 0, random.Random(p.id)))  # noqa: S311 (fixture seed, not security)
     return out
 
 
