@@ -143,6 +143,14 @@ PROMPTS: list[Prompt] = [
             ("Islamic Studies Library", "islamic studies", "islamic library"),
             ("Birks Reading Room", "birks"),
             ("Rare Books and Special Collections", "rare books", "rbsc"),
+            (
+                "Walter Hitschfeld Geographic Information Centre",
+                "hitschfeld",
+                "walter hitschfeld",
+                "geographic information centre",
+                "gic",
+                "map library",
+            ),
             ("Education Curriculum Resources Centre", "ecrc", "education library", "curriculum resources centre"),
         ],
         decoys=[

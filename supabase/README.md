@@ -5,7 +5,7 @@ Supabase is the production Postgres for Rarest Blue. It holds three tables:
 | Table | What's in it |
 |---|---|
 | `daily_prompts` | One row per day: the 7 prompts the nightly LLM job wrote (answers, aliases, decoys, golden krill), plus `source` (the model name, or `fallback`) |
-| `guesses` | Every player's answer to every prompt, with the points and rarity share it scored |
+| `guesses` | Every player's answer to every prompt, with the points and rarity share it scored. **Kept for the day only** (see below) |
 | `finishes` | Each player's final score and nickname for the day (the leaderboard) |
 
 The FastAPI backend is the only thing that talks to the database. It connects as the `postgres` role over
@@ -49,7 +49,7 @@ The migration is idempotent, so it doesn't matter whether it runs before or afte
 
 ```bash
 supabase login                                   # opens the browser
-supabase link --project-ref glwmhcxhxjbbevgtydyv # asks for the database password
+supabase link --project-ref pcptafbdqvncqeibkptl # the mcgill-krillion project
 ```
 
 Then, for the hosted project, always pass `--remote` (without it the CLI targets a local Docker stack):
@@ -62,6 +62,24 @@ supabase/verify.sh                 # re-check the lockdown afterwards
 
 New schema changes go in a new file in `supabase/migrations/` (`supabase migration new <name>`). Don't edit an
 applied migration. Mirror the change in `SCHEMA` in `src/rarest_blue/infrastructure/postgres.py`.
+
+## Nightly cleanup of players' answers
+
+Players' answers aren't kept. `20261125000000_clear_old_guesses.sql` turns on `pg_cron` and schedules
+`mcgill-krillion-clear-old-guesses`. Right after midnight Montreal time it deletes every row in `guesses` from an
+earlier day. The API only reads today's guesses, so nothing notices. `daily_prompts` (the generated questions and
+answers, which the generator also reads to avoid repeats) and `finishes` (the leaderboard) stay.
+
+pg_cron runs on UTC, so the job fires at 04:05 and 05:05 UTC. One of those is 00:05 Montreal in each season; the
+other is 23:05 and deletes nothing new, because the cutoff is "today in Montreal". On plain Postgres (docker, CI)
+the migration skips the job.
+
+```bash
+supabase db query --remote --read-only "select jobname, schedule, active from cron.job"
+supabase db query --remote --read-only "select status, start_time, return_message from cron.job_run_details order by start_time desc limit 5"
+```
+
+The 23:30 question generator is separate: Cloud Scheduler runs the Cloud Run job (`deploy/setup.sh`).
 
 ## Editing a day's questions
 

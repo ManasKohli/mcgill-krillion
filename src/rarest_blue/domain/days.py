@@ -4,7 +4,7 @@ import hashlib
 from datetime import date, datetime
 
 from .models import Prompt
-from .rules import LAUNCH_DATE, PROMPTS_PER_DAY, MONTREAL
+from .rules import LAUNCH_DATE, MONTREAL, PROMPTS_PER_DAY
 
 
 def today() -> date:
