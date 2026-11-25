@@ -1,8 +1,8 @@
 """Review rejected guesses and accept the real answers the list missed.
 
     python -m rarest_blue.entrypoints.cli.review                    # today's most common rejected guesses
-    python -m rarest_blue.entrypoints.cli.review accept subway "Spadina Stn" --as Spadina   # new alias
-    python -m rarest_blue.entrypoints.cli.review accept subway "Dupont"                     # new answer
+    python -m rarest_blue.entrypoints.cli.review accept green_line "Berri Stn" --as Berri-UQAM   # new alias
+    python -m rarest_blue.entrypoints.cli.review accept libraries "Walter Hitschfeld"             # new answer
 
 Accepting updates the stored set and rescores every guess it now matches, including players' leaderboard totals.
 """

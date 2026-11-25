@@ -33,9 +33,9 @@ def test_aliases_and_typos_match():
 
 
 def test_short_codes_do_not_fuzz():
-    courses = Prompt("codes", "Course codes", "", "MAT157", [("MAT137",), ("MAT157",)])
-    assert match_answer(courses, "mat137") == "MAT137"
-    assert match_answer(courses, "MAT") is None
+    courses = Prompt("codes", "Course codes", "", "COMP251", [("COMP250",), ("COMP251",)])
+    assert match_answer(courses, "comp250") == "COMP250"
+    assert match_answer(courses, "COMP") is None
 
 
 def test_short_forms_and_extra_words_match():
@@ -43,20 +43,20 @@ def test_short_forms_and_extra_words_match():
         "places",
         "Places",
         "",
-        "Innis College Library",
+        "Redpath Hall Library",
         [
-            ("Lash Miller Chemical Laboratories",),
-            ("Koffler Student Services Centre",),
-            ("Spadina",),
-            ("Innis College Library", "innis"),
-            ("University College",),
-            ("University Library",),
+            ("Otto Maass Chemistry Building",),
+            ("Brown Student Services Building",),
+            ("Peel",),
+            ("Redpath Hall Library", "redpath"),
+            ("University Centre",),
+            ("University Street",),
         ],
     )
-    assert match_answer(buildings, "Lash Miller Chemical") == "Lash Miller Chemical Laboratories"
-    assert match_answer(buildings, "Koffler Student") == "Koffler Student Services Centre"
-    assert match_answer(buildings, "Spadina Station") == "Spadina"
-    assert match_answer(buildings, "Innis Library") == "Innis College Library"
+    assert match_answer(buildings, "Otto Maass Chemistry") == "Otto Maass Chemistry Building"
+    assert match_answer(buildings, "Brown Student") == "Brown Student Services Building"
+    assert match_answer(buildings, "Peel Station") == "Peel"
+    assert match_answer(buildings, "Redpath Library") == "Redpath Hall Library"
     # Ambiguous or generic leading words don't count.
     assert match_answer(buildings, "University") is None
     assert match_answer(buildings, "Faculty") is None

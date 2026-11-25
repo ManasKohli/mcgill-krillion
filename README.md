@@ -2,7 +2,7 @@
 
 A daily trivia game for McGill students, played as an ocean dive. You get 7 McGill prompts with 25 seconds each.
 Any valid answer counts, and **the fewer people who gave your answer, the deeper you sink.**
-Each point is 10 m, and the depth zones go from Philosopher's Walk Shallows down to The Steam Tunnels.
+Each point is 10 m, and the depth zones go from Lower Field Shallows down to Burnside Basement.
 Answers score by rarity: Common 10, Uncommon 30, Rare 60, Deep Cut 85. Every prompt also hides one
 **One in a Krillion** answer worth 100.
 Common answers have at least a 10% share; Uncommon is 3–10%, Rare is 1–3%, and Deep Cut is below 1%.
@@ -31,7 +31,7 @@ fallback bank and generator prompts. Game fixes made there can be cherry-picked 
 
 ```bash
 cp .env.example .env          # then paste your OpenRouter key into .env
-docker compose up --build     # Postgres + API on http://localhost:8000
+docker compose up --build     # API on http://localhost:8001, Postgres on localhost:5433
 
 # frontend (another terminal)
 cd web && npm install && npm run dev   # http://localhost:3000
@@ -39,6 +39,25 @@ cd web && npm install && npm run dev   # http://localhost:3000
 
 Generate tomorrow's prompts into the local database: `docker compose run --rm api python -m rarest_blue.entrypoints.cli.generate`.
 Add `--dry-run` to print the set without storing it. `docker compose down -v` wipes the database.
+
+Local ports are 8001 (API) and 5433 (Postgres), not the usual 8000/5432, so this never talks to a
+uoft-krillion backend running on the same machine.
+
+## Test dive (no backend)
+
+To play the McGill questions against hardcoded answers, run only the frontend and open
+http://localhost:3000/?test
+
+- All prompts in `src/rarest_blue/domain/prompt_bank.py` (not just 7), with McGill depth zones, scored the way a fresh day
+  is scored, so every tier is reachable.
+- An answer key panel (bottom right) lists the current prompt's answers by tier. Click one to dive with it, or type
+  answers, aliases, typos or the listed decoys yourself to check matching and "did you mean".
+- "Run out of air" plays a miss. Results, the answer reveal and the dive log all work. Nothing is saved or sent;
+  refresh to start over.
+- After editing the prompt bank, regenerate the hardcoded answers:
+  `cd src && python -m rarest_blue.entrypoints.cli.test_dive` (rewrites `web/app/lib/testDive.ts`).
+- Dev builds only. A preview deploy can opt in with `NEXT_PUBLIC_TEST_DIVE=1`; never set that in production, the key
+  gives the answers away.
 
 ## Run it without Docker
 
@@ -48,7 +67,7 @@ Add `--dry-run` to print the set without storing it. `docker compose down -v` wi
 # backend (terminal 1)
 cd src
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/uvicorn --factory rarest_blue.entrypoints.http.app:create_app --reload --port 8000
+.venv/bin/uvicorn --factory rarest_blue.entrypoints.http.app:create_app --reload --port 8001
 
 # frontend (terminal 2)
 cd web
@@ -59,7 +78,7 @@ npm run dev        # http://localhost:3000
 Tests: `cd src && .venv/bin/pip install -r requirements-dev.txt && .venv/bin/pytest && .venv/bin/ruff check .`.
 The API and generator tests need a scratch Postgres: set `TEST_DATABASE_URL` (its tables get truncated). Without it they're skipped.
 Don't point it at your dev database. With compose, run `docker compose exec db createdb -U postgres rarest_test` once and use
-`TEST_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/rarest_test`.
+`TEST_DATABASE_URL=postgresql://postgres:postgres@localhost:5433/rarest_test`.
 
 ## Daily prompts
 
@@ -103,7 +122,7 @@ A real answer missing from the list scores zero, so check what players typed tha
 ```bash
 docker compose run --rm api python -m rarest_blue.entrypoints.cli.review                      # today's top rejected guesses
 docker compose run --rm api python -m rarest_blue.entrypoints.cli.review accept custom_prompt "Missing answer"  # add a new answer
-docker compose run --rm api python -m rarest_blue.entrypoints.cli.review accept theology_colleges "Knox Coll" --as "Knox College"  # add an alias
+docker compose run --rm api python -m rarest_blue.entrypoints.cli.review accept libraries "Gelber Law" --as "Nahum Gelber Law Library"  # add an alias
 ```
 
 Accepting updates the day's stored set and rescores every guess it now matches, leaderboard totals included.
@@ -122,7 +141,7 @@ Deploying a bank change affects future fallback sets; already stored daily sets 
 
 ## Config
 
-- `API_URL` (web): sets the backend URL. The default is `http://localhost:8000`.
+- `API_URL` (web): sets the backend URL. The default is `http://localhost:8001`.
 - `DATABASE_URL` (src): the Postgres connection string. For Supabase, use the **transaction pooler** URL.
 - `OPENROUTER_API_KEY` (src, generator only): the OpenRouter API key.
 - `GENERATOR_MODEL` (src, generator only): the OpenRouter model that writes prompts. The default is `google/gemini-3.6-flash`.

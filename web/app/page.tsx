@@ -6,6 +6,8 @@ import { IntroScreen } from "./components/IntroScreen";
 import { PlayScreen } from "./components/PlayScreen";
 import { ResultsScreen } from "./components/ResultsScreen";
 import { DevReset } from "./components/DevReset";
+import { TestKey } from "./components/TestKey";
+import { TEST_MODE } from "./lib/testMode";
 import { Flash } from "./components/Flash";
 import { BubbleRush } from "./components/BubbleRush";
 import { Scene } from "./components/Scene";
@@ -67,7 +69,7 @@ export default function Game() {
             <Panel className="max-w-sm p-6">
               <Label className="text-coral">Lost signal</Label>
               <p className="mt-3 text-sm leading-relaxed text-mist">
-                Can’t reach the dive server. Check the backend is running on :8000, then refresh.
+                Can’t reach the dive server. Check the backend is running on :8001, then refresh, or open <a href="/?test" className="underline">/?test</a> to play the test dive.
               </p>
             </Panel>
           )}
@@ -131,7 +133,9 @@ export default function Game() {
         />
       )}
 
-      {process.env.NODE_ENV === "development" && <DevReset day={daily.day} />}
+      {TEST_MODE && phase === "intro" && <TestKey />}
+      {TEST_MODE && phase === "play" && g.prompt && <TestKey prompt={g.prompt} onPick={g.submit} />}
+      {process.env.NODE_ENV === "development" && !TEST_MODE && <DevReset day={daily.day} />}
     </main>
   );
 }

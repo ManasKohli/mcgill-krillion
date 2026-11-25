@@ -1,3 +1,6 @@
+import { testApi } from "./testApi";
+import { TEST_MODE } from "./testMode";
+
 export type Prompt = {
   id: string;
   text: string;
@@ -86,7 +89,7 @@ async function call<T>(path: string, body?: unknown): Promise<T> {
   return res.json();
 }
 
-export const api = {
+const serverApi = {
   daily: () => call<Daily>("daily"),
   check: (prompt_id: string, answer: string) => call<CheckResult>("check", { prompt_id, answer }),
   guess: (player_id: string, prompt_id: string, answer: string) =>
@@ -97,9 +100,9 @@ export const api = {
     } catch (error) {
       // Frontend and backend deploy separately. Support the old API during rollout.
       if (!(error instanceof ApiError) || (error.status !== 404 && error.status !== 405)) throw error;
-      const check = await api.check(prompt_id, answer);
+      const check = await serverApi.check(prompt_id, answer);
       if (!check.correct) return { accepted: false, check };
-      return { accepted: true, result: await api.guess(player_id, prompt_id, answer) };
+      return { accepted: true, result: await serverApi.guess(player_id, prompt_id, answer) };
     }
   },
   answers: (player_id: string, prompt_id: string) =>
@@ -109,3 +112,7 @@ export const api = {
   /** Only exists when the backend runs with DEV_RESET=1 (docker compose sets it). */
   devReset: (player_id: string) => call<{ ok: boolean }>("dev/reset", { player_id }),
 };
+
+/** The dive server, or the hardcoded McGill test dive when the page is opened with ?test. */
+export const api: typeof serverApi = TEST_MODE ? testApi : serverApi;
+

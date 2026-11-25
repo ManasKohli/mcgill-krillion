@@ -3,91 +3,91 @@
     "id": "matching_fixture",
     "text": "Matching fixture",
     "hint": "",
-    "golden": "Woodsworth College",
+    "golden": "Gardner Hall",
     "answers": [
       [
-        "Trinity College",
-        "trinity",
-        "trin"
+        "Royal Victoria College",
+        "rvc",
+        "royal vic"
       ],
       [
-        "Victoria College",
-        "victoria",
-        "vic"
+        "New Residence Hall",
+        "new rez",
+        "new res"
       ],
       [
-        "University College",
+        "University Centre",
         "uc",
         "university"
       ],
       [
-        "St. Michael's College",
-        "st michaels",
-        "saint michaels",
-        "st mikes",
-        "smc",
-        "st mike"
+        "St. Joseph's Oratory",
+        "st josephs",
+        "saint josephs",
+        "st joes",
+        "sjo",
+        "st joe"
       ],
       [
-        "Innis College",
-        "innis"
+        "Redpath Hall",
+        "redpath"
       ],
       [
-        "New College",
-        "new"
+        "Molson Hall",
+        "molson"
       ],
       [
-        "Woodsworth College",
-        "woodsworth",
-        "woody"
+        "Gardner Hall",
+        "gardner",
+        "gardo"
       ],
       [
-        "Lash Miller Chemical Laboratories"
+        "Otto Maass Chemistry Building"
       ],
       [
-        "Koffler Student Services Centre"
+        "Brown Student Services Building"
       ],
       [
-        "Innis College Library",
-        "innis library"
+        "Redpath Library",
+        "redpath library"
       ],
       [
-        "Spadina"
+        "Peel"
       ],
       [
-        "University Library"
+        "University Street"
       ],
       [
-        "MAT137"
+        "COMP250"
       ],
       [
-        "MAT157"
+        "COMP251"
       ],
       [
-        "Université de Hearst",
-        "hearst"
+        "Université de Montréal",
+        "udem"
       ]
     ],
     "decoys": [
-      "Massey College",
-      "Knox College",
-      "Emmanuel College",
-      "Wycliffe College",
-      "Regis College",
-      "St. Hilda's College",
-      "Loretto College",
-      "Glendon College",
-      "Scarborough College",
-      "Erindale College",
-      "Huron University College",
-      "King's University College"
+      "Thomson House",
+      "Hingston Hall",
+      "Grey Nuns Residence",
+      "Presbyterian College",
+      "Montreal Diocesan Theological College",
+      "St. Mary's Hospital",
+      "Loyola College",
+      "Dawson College",
+      "Vanier College",
+      "John Abbott College",
+      "Marianopolis College",
+      "Champlain College"
     ]
   },
   "cases": [
     {
-      "raw": "Vic",
-      "normalized": "vic",
-      "answer": "Victoria College",
+      "raw": "Rvc",
+      "normalized": "rvc",
+      "answer": "Royal Victoria College",
       "check": {
         "recognized": true,
         "correct": true,
@@ -95,9 +95,9 @@
       }
     },
     {
-      "raw": "st. mike's",
-      "normalized": "saint mikes",
-      "answer": "St. Michael's College",
+      "raw": "st. joe's",
+      "normalized": "saint joes",
+      "answer": "St. Joseph's Oratory",
       "check": {
         "recognized": true,
         "correct": true,
@@ -105,28 +105,28 @@
       }
     },
     {
-      "raw": "Woodsworht",
-      "normalized": "woodsworht",
-      "answer": "Woodsworth College",
+      "raw": "Gardnre",
+      "normalized": "gardnre",
+      "answer": "Gardner Hall",
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": "Woodsworth College"
+        "suggestion": "Gardner Hall"
       }
     },
     {
-      "raw": "Masey College",
-      "normalized": "masey college",
+      "raw": "Thomsen House",
+      "normalized": "thomsen house",
       "answer": null,
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": "Massey College"
+        "suggestion": "Thomson House"
       }
     },
     {
-      "raw": "Ryerson Hall",
-      "normalized": "ryerson hall",
+      "raw": "Concordia Hall",
+      "normalized": "concordia hall",
       "answer": null,
       "check": {
         "recognized": false,
@@ -155,19 +155,19 @@
       }
     },
     {
-      "raw": "MAT",
-      "normalized": "mat",
+      "raw": "COMP",
+      "normalized": "comp",
       "answer": null,
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": null
+        "suggestion": "COMP251"
       }
     },
     {
-      "raw": "mat137",
-      "normalized": "mat137",
-      "answer": "MAT137",
+      "raw": "comp250",
+      "normalized": "comp250",
+      "answer": "COMP250",
       "check": {
         "recognized": true,
         "correct": true,
@@ -175,9 +175,9 @@
       }
     },
     {
-      "raw": "MAT157",
-      "normalized": "mat157",
-      "answer": "MAT157",
+      "raw": "COMP251",
+      "normalized": "comp251",
+      "answer": "COMP251",
       "check": {
         "recognized": true,
         "correct": true,
@@ -187,7 +187,7 @@
     {
       "raw": "University",
       "normalized": "university",
-      "answer": "University College",
+      "answer": "University Centre",
       "check": {
         "recognized": true,
         "correct": true,
@@ -205,9 +205,9 @@
       }
     },
     {
-      "raw": "Lash Miller Chemical",
-      "normalized": "lash miller chemical",
-      "answer": "Lash Miller Chemical Laboratories",
+      "raw": "Otto Maass Chemistry",
+      "normalized": "otto maass chemistry",
+      "answer": "Otto Maass Chemistry Building",
       "check": {
         "recognized": true,
         "correct": true,
@@ -215,9 +215,9 @@
       }
     },
     {
-      "raw": "Koffler Student",
-      "normalized": "koffler student",
-      "answer": "Koffler Student Services Centre",
+      "raw": "Brown Student",
+      "normalized": "brown student",
+      "answer": "Brown Student Services Building",
       "check": {
         "recognized": true,
         "correct": true,
@@ -225,9 +225,9 @@
       }
     },
     {
-      "raw": "Spadina Station",
-      "normalized": "spadina station",
-      "answer": "Spadina",
+      "raw": "Peel Station",
+      "normalized": "peel station",
+      "answer": "Peel",
       "check": {
         "recognized": true,
         "correct": true,
@@ -235,9 +235,9 @@
       }
     },
     {
-      "raw": "Innis Library",
-      "normalized": "innis library",
-      "answer": "Innis College Library",
+      "raw": "Redpath Library",
+      "normalized": "redpath library",
+      "answer": "Redpath Library",
       "check": {
         "recognized": true,
         "correct": true,
@@ -245,9 +245,9 @@
       }
     },
     {
-      "raw": "Université de Hearst",
-      "normalized": "universite de hearst",
-      "answer": "Université de Hearst",
+      "raw": "Université de Montréal",
+      "normalized": "universite de montreal",
+      "answer": "Université de Montréal",
       "check": {
         "recognized": true,
         "correct": true,
@@ -255,9 +255,9 @@
       }
     },
     {
-      "raw": "St. Michaels",
-      "normalized": "saint michaels",
-      "answer": "St. Michael's College",
+      "raw": "St. Josephs",
+      "normalized": "saint josephs",
+      "answer": "St. Joseph's Oratory",
       "check": {
         "recognized": true,
         "correct": true,
@@ -265,9 +265,9 @@
       }
     },
     {
-      "raw": "Saint Michaels College",
-      "normalized": "saint michaels college",
-      "answer": "St. Michael's College",
+      "raw": "Saint Josephs Oratory",
+      "normalized": "saint josephs oratory",
+      "answer": "St. Joseph's Oratory",
       "check": {
         "recognized": true,
         "correct": true,
@@ -275,8 +275,8 @@
       }
     },
     {
-      "raw": "Knox",
-      "normalized": "knox",
+      "raw": "Hingston",
+      "normalized": "hingston",
       "answer": null,
       "check": {
         "recognized": true,
@@ -285,8 +285,8 @@
       }
     },
     {
-      "raw": "Massey College",
-      "normalized": "massey college",
+      "raw": "Thomson House",
+      "normalized": "thomson house",
       "answer": null,
       "check": {
         "recognized": true,
@@ -305,19 +305,19 @@
       }
     },
     {
-      "raw": "woods",
-      "normalized": "woods",
+      "raw": "gardn",
+      "normalized": "gardn",
       "answer": null,
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": "Woodsworth College"
+        "suggestion": "Gardner Hall"
       }
     },
     {
-      "raw": "WOODSWORTH COLLEGE",
-      "normalized": "woodsworth college",
-      "answer": "Woodsworth College",
+      "raw": "GARDNER HALL",
+      "normalized": "gardner hall",
+      "answer": "Gardner Hall",
       "check": {
         "recognized": true,
         "correct": true,
@@ -325,19 +325,19 @@
       }
     },
     {
-      "raw": "Trnity",
-      "normalized": "trnity",
-      "answer": "Trinity College",
+      "raw": "Redpth",
+      "normalized": "redpth",
+      "answer": "Redpath Hall",
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": "Trinity College"
+        "suggestion": "Redpath Hall"
       }
     },
     {
-      "raw": "New College",
-      "normalized": "new college",
-      "answer": "New College",
+      "raw": "Molson Hall",
+      "normalized": "molson hall",
+      "answer": "Molson Hall",
       "check": {
         "recognized": true,
         "correct": true,
@@ -345,13 +345,13 @@
       }
     },
     {
-      "raw": "The University of Toronto",
-      "normalized": "university toronto",
+      "raw": "The University of Quebec",
+      "normalized": "university quebec",
       "answer": null,
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": "University College"
+        "suggestion": "University Street"
       }
     },
     {
@@ -365,8 +365,8 @@
       }
     },
     {
-      "raw": "St. Hilda’s College",
-      "normalized": "saint hildas college",
+      "raw": "St. Mary’s Hospital",
+      "normalized": "saint marys hospital",
       "answer": null,
       "check": {
         "recognized": true,
@@ -375,23 +375,23 @@
       }
     },
     {
-      "raw": "Univeristy College",
-      "normalized": "univeristy college",
-      "answer": "University College",
+      "raw": "Univeristy Centre",
+      "normalized": "univeristy centre",
+      "answer": "University Centre",
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": "University College"
+        "suggestion": "University Centre"
       }
     },
     {
-      "raw": "innis librarey",
-      "normalized": "innis librarey",
-      "answer": "Innis College Library",
+      "raw": "redpath librarey",
+      "normalized": "redpath librarey",
+      "answer": "Redpath Library",
       "check": {
         "recognized": false,
         "correct": false,
-        "suggestion": "Innis College Library"
+        "suggestion": "Redpath Library"
       }
     }
   ]

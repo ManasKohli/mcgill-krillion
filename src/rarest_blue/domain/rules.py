@@ -3,8 +3,8 @@
 from datetime import date
 from zoneinfo import ZoneInfo
 
-# Montreal keeps the same clock as Toronto; this is the zone tzdata ships everywhere.
-TORONTO = ZoneInfo("America/Toronto")
+# Montréal time. tzdata names the Eastern zone "America/Toronto"; it is the same clock.
+MONTREAL = ZoneInfo("America/Toronto")
 LAUNCH_DATE = date(2026, 11, 1)
 
 PROMPTS_PER_DAY = 7

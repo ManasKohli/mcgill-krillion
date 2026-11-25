@@ -24,7 +24,7 @@ test("local matching agrees with the Python server on aliases, typos, codes and 
 
 test("the full scored result is available synchronously without fetching", (t) => {
   t.mock.method(globalThis, "fetch", () => { throw new Error("local matching must not fetch"); });
-  const result = localAttempt(play, "Vic");
+  const result = localAttempt(play, "Rvc");
   assert.equal(result.accepted, true);
   assert.equal(result.result.points, 30);
   assert.equal(result.result.rarity, "Uncommon");

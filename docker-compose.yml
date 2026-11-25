@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"  # 5433 on the host, clear of uoft-krillion's Postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -21,7 +21,7 @@ services:
       CORS_ORIGINS: http://localhost:3000
       DEV_RESET: "1" # enables /api/dev/reset for the dev-mode reset button
     ports:
-      - "8000:8080"
+      - "8001:8080"  # 8001, not 8000, so it never collides with uoft-krillion's API
     depends_on:
       db:
         condition: service_healthy

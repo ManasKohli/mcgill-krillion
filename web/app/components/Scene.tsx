@@ -147,6 +147,12 @@ export function Scene({
           {GULLS.map(([top, secs, offset], i) => (
             <Gull key={i} top={top} seconds={secs} offset={offset} />
           ))}
+          {/* Montreal on the far shore: Mont Royal, the Oratory, the Arts Building, the Jacques-Cartier bridge */}
+          <img
+            src="/skyline.png"
+            alt=""
+            className="pointer-events-none absolute bottom-1 left-1/2 w-[max(100%,52rem)] max-w-none -translate-x-1/2 opacity-80"
+          />
         </div>
         <Water />
         <div
@@ -254,11 +260,11 @@ function Gull({ top, seconds, offset }: { top: number; seconds: number; offset: 
 
 function Ruin({ kind, style }: { kind: "arch" | "column" | "dome"; style: React.CSSProperties }) {
   const shapes = {
-    // a collapsed gothic arch, like a drowned Hart House cloister
+    // a collapsed gothic arch, like a drowned Arts Building portico
     arch: "M0 40v-24h2v-6h2v-4h2v-2h2v-2h8v2h2v2h2v4h2v6h2v24h-6v-20h-1v-3h-2v-2h-6v2h-2v3h-1v20z",
     // a broken column with its capital
     column: "M4 40v-30h-2v-3h12v3h-2v30zM2 7v-3h4v-1h2v1h6v3z",
-    // half a dome, like a sunken Convocation Hall
+    // half a dome, like a sunken Saint Joseph's Oratory
     dome: "M0 40v-12h2v-4h2v-3h3v-2h4v-1h8v1h4v2h3v3h2v4h2v12h-6v-8h-4v8h-6v-8h-4v8z",
   };
   return (
