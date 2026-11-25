@@ -1,0 +1,33 @@
+import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { IBM_Plex_Mono, Pixelify_Sans } from "next/font/google";
+import "./globals.css";
+
+const pixel = Pixelify_Sans({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-pixelify" });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex" });
+
+export const metadata: Metadata = {
+  title: "McGill Krillion · Deeper dive into McGill",
+  description: "McGill Krillion: a daily McGill trivia dive. Rarer answers sink deeper.",
+};
+
+export const viewport: Viewport = { themeColor: "#040a16" };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${pixel.variable} ${mono.variable}`}>
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5618307862587087"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body>
+        {children}
+        <div className="scanlines" aria-hidden />
+        <Analytics />
+      </body>
+    </html>
+  );
+}
