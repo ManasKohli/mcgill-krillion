@@ -2,27 +2,43 @@ from datetime import timedelta
 
 from rarest_blue.application import review
 from rarest_blue.domain import days, rules
+from rarest_blue.domain.prompt_bank import PROMPTS
 from rarest_blue.entrypoints.cli import generate as generate_cli
-from tests.factories import FakeWriter
+from tests.factories import FakeWriter, FreshWriter
 
 
-def test_generator_stores_two_days_ahead_once(database, uow):
-    writer = FakeWriter()
-    target = days.today() + timedelta(days=generate_cli.DAYS_AHEAD)
+def test_generator_fills_tomorrow_and_two_days_ahead_once(database, uow):
+    # Launch night: nothing stored yet, so tomorrow is backfilled along with the usual two days out.
+    writer = FreshWriter()
+    tomorrow, two_out = generate_cli.target_days(days.today())
+    assert two_out == days.today() + timedelta(days=generate_cli.DAYS_AHEAD)
 
     assert generate_cli.main([], settings=database, writer=writer) == 0
     with uow() as tx:
-        stored = tx.prompts.get(target)
-    assert [p.id for p in stored] == [f"topic{i}" for i in range(rules.PROMPTS_PER_DAY)]
+        assert [p.id for p in tx.prompts.get(tomorrow)] == [f"set1topic{i}" for i in range(rules.PROMPTS_PER_DAY)]
+        assert [p.id for p in tx.prompts.get(two_out)] == [f"set2topic{i}" for i in range(rules.PROMPTS_PER_DAY)]
+        assert tx.prompts.get(days.today()) is None  # today is never touched: it may already be live
 
     assert generate_cli.main([], settings=database, writer=writer) == 0  # second run is a no-op
+    assert writer.models == [database.generator_model, database.verifier_model] * 2
+
+
+def test_normal_night_only_generates_two_days_out(database, uow):
+    tomorrow, two_out = generate_cli.target_days(days.today())
+    with uow() as tx:
+        tx.prompts.add(tomorrow, days.pick_fallback(tomorrow, PROMPTS), source="stored last night")
+    writer = FakeWriter()
+
+    assert generate_cli.main([], settings=database, writer=writer) == 0
+    with uow() as tx:
+        assert tx.prompts.get(two_out) is not None
     assert writer.models == [database.generator_model, database.verifier_model]
 
 
 def test_generator_retries_then_fails(database):
     writer = FakeWriter(error=ValueError("bad json"))
     assert generate_cli.main([], settings=database, writer=writer) == 1
-    assert writer.models == [database.generator_model] * 3
+    assert writer.models == [database.generator_model] * 3 * generate_cli.DAYS_AHEAD  # each missing day tries 3x
 
 
 def test_accepting_a_missed_answer_rescores(client, uow):

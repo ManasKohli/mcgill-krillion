@@ -21,11 +21,11 @@ def gen_prompt(
     )
 
 
-def gen_set() -> generation.GenSet:
+def gen_set(prefix: str = "topic") -> generation.GenSet:
     categories = list(generation.Category.__args__)
     return generation.GenSet(
         prompts=[
-            gen_prompt(f"topic{i}", category=categories[i % len(categories)]) for i in range(rules.PROMPTS_PER_DAY)
+            gen_prompt(f"{prefix}{i}", category=categories[i % len(categories)]) for i in range(rules.PROMPTS_PER_DAY)
         ]
     )
 
@@ -79,3 +79,18 @@ class FakeWriter:
         if response_schema is generation.VERDICT_SCHEMA:
             return (self.verdicts or all_clear(gen)).model_dump_json()
         return gen.model_dump_json()
+
+
+class FreshWriter(FakeWriter):
+    """A FakeWriter that writes a brand-new set (set1topic0..., set2topic0...) for each generator request, so
+    consecutive days don't trip the no-repeats check."""
+
+    def __init__(self):
+        super().__init__()
+        self.sets = 0
+
+    def write(self, request: str, model: str, response_schema: dict, temperature: float) -> str:
+        if response_schema is not generation.VERDICT_SCHEMA:
+            self.sets += 1
+            self.reply = gen_set(f"set{self.sets}topic")
+        return super().write(request, model, response_schema, temperature)
