@@ -6,20 +6,20 @@ import { CREATURE, dropOf, meters, TONE_LABEL, TONE_TEXT, toneOf, type Tone } fr
 import { sinkMs, verdictMs } from "../lib/useDive";
 
 // How hard each tier celebrates, in its creature's colours: particle burst, sonar rings, glow.
-// `colors` alternate across the particles (perch teal + yellow, anglerfish purple + neon cyan, ...).
+// `colors` alternate across the particles (pike green + lime, walleye purple + violet, ...).
 type Fx = { particles: number; reach: number; colors: string[]; rings: number; glow: string; scale: number; sprite: number };
 const FX: Record<Tone, Fx> = {
   common: { particles: 6, reach: 60, colors: ["var(--color-alewife)"], rings: 0, glow: "transparent", scale: 1, sprite: 150 },
-  uncommon: { particles: 12, reach: 95, colors: ["var(--color-perch)", "var(--color-perch-fin)"], rings: 1, glow: "rgba(60,198,180,0.18)", scale: 1.05, sprite: 160 },
-  rare: { particles: 18, reach: 140, colors: ["var(--color-rare)", "#ffa3a3"], rings: 2, glow: "rgba(234,74,79,0.28)", scale: 1.12, sprite: 260 },
-  deepcut: { particles: 26, reach: 190, colors: ["var(--color-deep)", "var(--color-neon)"], rings: 3, glow: "rgba(111,47,208,0.45)", scale: 1.2, sprite: 190 },
-  golden: { particles: 38, reach: 260, colors: ["var(--color-gold)", "#ffffff", "var(--color-red)"], rings: 3, glow: "rgba(232,184,74,0.45)", scale: 1.3, sprite: 200 },
+  uncommon: { particles: 12, reach: 95, colors: ["var(--color-perch)", "var(--color-perch-fin)"], rings: 1, glow: "rgba(143,207,60,0.18)", scale: 1.05, sprite: 160 },
+  rare: { particles: 18, reach: 140, colors: ["var(--color-rare)", "#d8f2ff"], rings: 2, glow: "rgba(92,196,245,0.28)", scale: 1.12, sprite: 200 },
+  deepcut: { particles: 26, reach: 190, colors: ["var(--color-walleye)", "var(--color-neon)"], rings: 3, glow: "rgba(164,92,240,0.45)", scale: 1.2, sprite: 210 },
+  golden: { particles: 38, reach: 260, colors: ["var(--color-gold)", "var(--color-red)", "#ffffff"], rings: 3, glow: "rgba(237,27,47,0.4)", scale: 1.3, sprite: 300 },
   miss: { particles: 0, reach: 0, colors: ["var(--color-slate)"], rings: 0, glow: "transparent", scale: 1, sprite: 0 },
 };
 
 /**
  * The verdict between prompts, scaled to the tier: Common gets a few bubbles, Deep Cut a
- * bioluminescent burst with sonar rings and a jolt, One in a Krillion a full golden bloom.
+ * bioluminescent burst with sonar rings and a jolt, One in a Krillion a full crimson-and-gold bloom.
  */
 export function Flash({ result }: { result: GuessResult }) {
   const tone = toneOf(result);
@@ -102,8 +102,8 @@ export function Flash({ result }: { result: GuessResult }) {
             <img
               src={creature.src}
               alt=""
-              className={`mx-auto mb-4 h-auto ${tone === "golden" ? "animate-krill-spin" : "animate-swim-in"}`}
-              style={{ width: fx.sprite, filter: tone === "deepcut" ? "drop-shadow(0 0 12px var(--color-neon))" : tone === "golden" ? "drop-shadow(0 0 14px rgba(232,184,74,0.7))" : undefined }}
+              className={`mx-auto mb-4 h-auto ${"animate-swim-in"}`}
+              style={{ width: fx.sprite, filter: tone === "deepcut" ? "drop-shadow(0 0 12px var(--color-neon))" : tone === "golden" ? "drop-shadow(0 0 10px rgba(237,27,47,0.6)) drop-shadow(0 0 18px rgba(232,184,74,0.55))" : undefined }}
             />
             </div>
           )}

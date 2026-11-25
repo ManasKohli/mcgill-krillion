@@ -4,11 +4,11 @@ import hashlib
 from datetime import date, datetime
 
 from .models import Prompt
-from .rules import LAUNCH_DATE, PROMPTS_PER_DAY, TORONTO
+from .rules import LAUNCH_DATE, PROMPTS_PER_DAY, MONTREAL
 
 
 def today() -> date:
-    return datetime.now(TORONTO).date()
+    return datetime.now(MONTREAL).date()
 
 
 def puzzle_number(day: date) -> int:

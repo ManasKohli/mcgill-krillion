@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, field
 
-DEFAULT_DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/postgres"
+DEFAULT_DATABASE_URL = "postgresql://postgres:postgres@localhost:5433/postgres"
 DEFAULT_CORS_ORIGINS = "http://localhost:3000"
 # Writes prompts, answers, aliases and a one-line explanation per answer.
 DEFAULT_GENERATOR_MODEL = "google/gemini-3.6-flash"

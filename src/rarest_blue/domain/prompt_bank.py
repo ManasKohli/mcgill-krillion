@@ -29,8 +29,8 @@ PROMPTS: list[Prompt] = [
         ],
         decoys=[
             "Thomson House",
-            "Hart House",
-            "Massey College",
+            "Hingston Hall",
+            "Pavillon Thérèse-Casgrain",
             "Grey Nuns Residence",
             "Shatner Building",
             "Leacock Building",
@@ -146,14 +146,14 @@ PROMPTS: list[Prompt] = [
             ("Education Curriculum Resources Centre", "ecrc", "education library", "curriculum resources centre"),
         ],
         decoys=[
-            "Robarts Library",
+            "Bibliothèque des lettres et sciences humaines",
             "Grande Bibliothèque",
             "Webster Library",
             "Vanier Library",
             "Redpath Museum",
             "Atwater Library",
             "Westmount Public Library",
-            "Fisher Library",
+            "Fraser-Hickson Library",
         ],
     ),
     Prompt(

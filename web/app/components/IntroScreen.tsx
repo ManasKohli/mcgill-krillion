@@ -45,6 +45,9 @@ export function IntroScreen({
         <p className="mt-3 float-in float-in-4 text-sm text-mcgill/90">
           {daily.prompts.length} prompts · {daily.time_limit} seconds each · rarer answers sink deeper
         </p>
+        <p className="mt-2 float-in float-in-4 font-pixel text-xs uppercase tracking-[0.3em] text-mcgill/70">
+          Grandescunt aucta labore · Est. 1821
+        </p>
       </header>
 
       <form onSubmit={go} className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center gap-4 px-5 pb-6">
@@ -64,7 +67,7 @@ export function IntroScreen({
           >
             How it works
           </button>
-          <span className="text-ink/70">Fan-made. Not affiliated with McGill.</span>
+          <span className="text-ink/70">Fan-made in Montréal. Not affiliated with McGill.</span>
         </div>
         </fieldset>
       </form>
@@ -87,11 +90,11 @@ export function IntroScreen({
             {maxScore(daily.prompts.length).toLocaleString("en-CA")}.
           </li>
         </ol>
-        <Label className="mt-6">What you can catch</Label>
+        <Label className="mt-6">What you can catch in the St. Lawrence</Label>
         <ol className="mt-3 space-y-1.5">
           {TIERS.map(([tone, points]) => (
             <li key={tone} className="grid grid-cols-[3.5rem_1fr_auto] items-center gap-3 text-sm">
-              <img src={CREATURE[tone]!.src} alt="" className="h-7 w-auto justify-self-center" />
+              <img src={CREATURE[tone]!.src} alt="" className="h-auto w-14 justify-self-center" />
               <span>
                 <span className={TONE_TEXT[tone]}>{TONE_LABEL[tone]}</span>
                 <span className="ml-2 text-xs text-slate">{CREATURE[tone]!.name}</span>

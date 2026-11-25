@@ -9,7 +9,6 @@
 @theme {
   --color-abyss: #040a16;
   --color-trench: #07112a;
-  --color-deep: #0b1a36;
   --color-mcgill: #8c1226;
   --color-line: #24406e;
   --color-ink: #eef2f8;
@@ -21,14 +20,16 @@
   --color-gold: #e8b84a;
   --color-coral: #e5675f;
 
-  /* Tier colours: Common alewife silver, Uncommon perch teal + yellow, Rare red,
-     Deep Cut dark purple (with anglerfish neon cyan), One in a Krillion McGill red + white + gold. */
+  /* Tier colours, one per St. Lawrence creature: Common alewife silver, Uncommon pike green + lime,
+     Rare lake-trout icy blue, Deep Cut walleye purple (with a violet glow),
+     One in a Krillion the Martlet sturgeon's McGill crimson + gold. */
   --color-alewife: #c4ccd8;
-  --color-perch: #3cc6b4;
-  --color-perch-fin: #f2d13a;
-  --color-rare: #ea4a4f;
+  --color-perch: #8fcf3c;
+  --color-perch-fin: #d8f05a;
+  --color-rare: #5cc4f5;
   --color-deep: #6f2fd0;
-  --color-neon: #2ce8ff;
+  --color-walleye: #a45cf0;
+  --color-neon: #d6a8ff;
 
   --font-pixel: var(--font-pixelify), ui-monospace, monospace;
   --font-mono: var(--font-plex), ui-monospace, monospace;
@@ -83,7 +84,6 @@
   --animate-rays: rays 2.2s ease-out both;
   --animate-jolt: jolt 0.6s ease-out both;
   --animate-count: count 0.7s cubic-bezier(.3,1.6,.5,1) 0.5s both;
-  --animate-krill-spin: krill-spin 2s cubic-bezier(.2,1.3,.4,1) both;
   --animate-swim-in: swim-in 1.6s cubic-bezier(.25,1.1,.4,1) both;
 
   @keyframes twinkle {
@@ -208,9 +208,6 @@
     70% { opacity: 1; transform: translateX(10px) rotate(3deg); }
     85% { transform: translateX(-4px) rotate(-1deg); }
     100% { transform: none; }
-  }
-  @keyframes krill-spin {
-    from { opacity: 0; transform: scale(0.2) rotate(-200deg); }
   }
 
   /* The between-prompt verdict: pop in, hold, then lift away. */

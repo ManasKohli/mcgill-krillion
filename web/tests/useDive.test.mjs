@@ -9,8 +9,8 @@ const { useDive } = loadTs(new URL("../app/lib/useDive.ts", import.meta.url));
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const play = {
-  answers: [{ names: ["Victoria College", "vic"], points: 30, share_pct: 5, rarity: "Uncommon", golden: false }],
-  decoys: ["Massey College"], golden_answer: "Victoria College", top: [], deep_cuts: [], players: 0, valid_answers: 1,
+  answers: [{ names: ["Royal Victoria College", "rvc"], points: 30, share_pct: 5, rarity: "Uncommon", golden: false }],
+  decoys: ["Thomson House"], golden_answer: "Royal Victoria College", top: [], deep_cuts: [], players: 0, valid_answers: 1,
 };
 const daily = {
   day: "2026-11-23", number: 23, time_limit: 25, meters_per_point: 10,
@@ -18,8 +18,8 @@ const daily = {
   prompts: ["first", "second"].map((id) => ({ id, text: "Name a college", hint: "", play })),
 };
 const confirmed = {
-  valid: true, answer: "Victoria College", points: 30, share_pct: 5, rarity: "Uncommon", golden: false,
-  golden_answer: "Victoria College", top: [], deep_cuts: [], players: 1, valid_answers: 1,
+  valid: true, answer: "Royal Victoria College", points: 30, share_pct: 5, rarity: "Uncommon", golden: false,
+  golden_answer: "Royal Victoria College", top: [], deep_cuts: [], players: 1, valid_answers: 1,
 };
 
 async function mount(t, { stored, data = daily, guess } = {}) {
@@ -54,8 +54,8 @@ test("Dive starts the scored animation before a pending save resolves, and preve
   const app = await mount(t, { guess: () => pending });
   await act(async () => app.game().begin());
   await act(async () => {
-    app.game().submit("vic");
-    app.game().submit("vic");
+    app.game().submit("rvc");
+    app.game().submit("rvc");
   });
   assert.equal(app.game().phase, "flash");
   assert.equal(app.game().submitting, false);
@@ -77,10 +77,10 @@ test("wrong answers and suggestions are immediate and never spend or save the pr
   const app = await mount(t);
   await act(async () => app.game().begin());
   let check;
-  await act(async () => { check = await app.game().submit("Massey College"); });
+  await act(async () => { check = await app.game().submit("Thomson House"); });
   assert.deepEqual(check, { recognized: true, correct: false, suggestion: null });
-  await act(async () => { check = await app.game().submit("Vctoria"); });
-  assert.equal(check.suggestion, "Victoria College");
+  await act(async () => { check = await app.game().submit("Royal Vctoria"); });
+  assert.equal(check.suggestion, "Royal Victoria College");
   assert.equal(app.game().phase, "play");
   assert.equal(app.game().results.length, 0);
   assert.equal(app.save.mock.callCount(), 0);
@@ -93,7 +93,7 @@ test("a failed background save does not interrupt play and finish waits for retr
     guess: async () => { if (failed) throw new Error("offline"); return confirmed; },
   });
   await act(async () => app.game().begin());
-  await act(async () => app.game().submit("vic"));
+  await act(async () => app.game().submit("rvc"));
   assert.equal(app.game().phase, "flash");
   assert.equal(app.game().sonarLost, true);
   await act(async () => t.mock.timers.tick(4000));
@@ -108,7 +108,7 @@ test("a failed background save does not interrupt play and finish waits for retr
 });
 
 test("refresh restores unsent guesses and retries them without replaying the completed prompt", async (t) => {
-  const app = await mount(t, { stored: { results: [{ ...confirmed, raw: "vic", synced: false }], startedAt: null, nickname: "Diver" } });
+  const app = await mount(t, { stored: { results: [{ ...confirmed, raw: "rvc", synced: false }], startedAt: null, nickname: "Diver" } });
   assert.equal(app.game().phase, "play");
   assert.equal(app.game().idx, 1);
   assert.equal(app.game().results[0].synced, true);
@@ -119,7 +119,7 @@ test("refresh restores unsent guesses and retries them without replaying the com
 test("a confirmation received during the animation survives the next prompt transition", async (t) => {
   const app = await mount(t);
   await act(async () => app.game().begin());
-  await act(async () => app.game().submit("vic"));
+  await act(async () => app.game().submit("rvc"));
   assert.equal(app.game().results[0].synced, true);
   await act(async () => t.mock.timers.tick(4000));
   assert.equal(app.game().phase, "play");

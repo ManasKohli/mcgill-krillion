@@ -22,7 +22,7 @@ export function toneOf(r: GuessResult): Tone {
 // Full class strings so Tailwind can see them at build time.
 export const TONE_TEXT: Record<Tone, string> = {
   golden: "text-gold",
-  deepcut: "text-deep",
+  deepcut: "text-walleye",
   rare: "text-rare",
   uncommon: "text-perch",
   common: "text-alewife",
@@ -31,7 +31,7 @@ export const TONE_TEXT: Record<Tone, string> = {
 
 export const TONE_BG: Record<Tone, string> = {
   golden: "bg-gold",
-  deepcut: "bg-deep",
+  deepcut: "bg-walleye",
   rare: "bg-rare",
   uncommon: "bg-perch",
   common: "bg-alewife",
@@ -55,17 +55,17 @@ export const dropOf = (r: GuessResult) => DROP_M[toneOf(r)];
 /** The creature each tier lands you, with its sprite in /public/fish. */
 export const CREATURE: Record<Tone, { name: string; src: string } | null> = {
   common: { name: "St. Lawrence Alewife", src: "/fish/alewife.png" },
-  uncommon: { name: "Lac Saint-Louis Perch", src: "/fish/perch.png" },
-  rare: { name: "Lake Sturgeon", src: "/fish/sturgeon.png" },
-  deepcut: { name: "Abyssal Anglerfish", src: "/fish/anglerfish.png" },
-  golden: { name: "Legendary Martlet Krill", src: "/fish/krill.png" },
+  uncommon: { name: "Lac Saint-Louis Pike", src: "/fish/pike.png" },
+  rare: { name: "Laurentian Lake Trout", src: "/fish/trout.png" },
+  deepcut: { name: "Lachine Rapids Walleye", src: "/fish/walleye.png" },
+  golden: { name: "Legendary Martlet Sturgeon", src: "/fish/sturgeon.png" },
   miss: null,
 };
 
 export const TONE_LINE: Record<Tone, string> = {
-  golden: "The one answer hidden at the bottom.",
+  golden: "Grandescunt aucta labore. Worth the work.",
   deepcut: "Even your TA missed that one. Nice.",
-  rare: "You have been around campus.",
+  rare: "You have been up and down Mont Royal.",
   uncommon: "Plenty of company on this one.",
   common: "The answer all of Leacock 132 shouts out.",
   miss: "Not on the list.",
@@ -87,7 +87,7 @@ export const maxScore = (prompts: number) => prompts * 100;
 const SHARE_GLYPH: Record<Tone, string> = {
   golden: "🦐",
   deepcut: "🟪",
-  rare: "🟥",
+  rare: "🟦",
   uncommon: "🟩",
   common: "⬜",
   miss: "⬛",
@@ -117,8 +117,8 @@ export function persist(key: string, value: unknown) {
   } catch {}
 }
 
-const ADJECTIVES = ["Swift", "Quiet", "Brave", "Sleepy", "Lucky", "Curious", "Salty", "Sly", "Bold", "Misty", "Gloomy", "Zippy"];
-const CREATURES = ["Lanternfish", "Anglerfish", "Octopus", "Squid", "Seahorse", "Narwhal", "Otter", "Nautilus", "Jellyfish", "Eel", "Manta", "Goose"];
+const ADJECTIVES = ["Swift", "Quiet", "Brave", "Sleepy", "Lucky", "Curious", "Salty", "Sly", "Bold", "Misty", "Gloomy", "Zippy", "Frosh", "Snowed-in"];
+const CREATURES = ["Lanternfish", "Anglerfish", "Octopus", "Squid", "Seahorse", "Narwhal", "Otter", "Nautilus", "Jellyfish", "Eel", "Manta", "Goose", "Martlet", "Sturgeon", "Pike", "Walleye", "Beaver"];
 
 /** A random leaderboard name, picked once and kept, since players don't type one. */
 export function diverName(): string {
@@ -137,7 +137,7 @@ export function playerId(): string {
   return id;
 }
 
-/** Milliseconds until the next dive, which resets at midnight Montreal time (Eastern, same zone as Toronto). */
+/** Milliseconds until the next dive, which resets at midnight Montreal time (America/Toronto is the Eastern zone id). */
 export function msToNextDive(now = new Date()): number {
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Toronto",

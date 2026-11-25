@@ -150,7 +150,7 @@ export function ResultsScreen({
 
         <p className="mt-8 text-center text-xs text-slate">
           Next dive in <span className="font-pixel tabular-nums text-mist">{left === null ? "--:--:--" : clock(left)}</span>. Go to
-          class.
+          class, Martlet.
         </p>
       </div>
     </div>

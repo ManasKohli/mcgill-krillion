@@ -4,7 +4,7 @@ import { dropOf, TONE_LABEL, toneOf, type Tone } from "../lib/game";
 // SVG fills need raw values; these mirror the tone tokens in globals.css.
 const FILL: Record<Tone, string> = {
   golden: "var(--color-gold)",
-  deepcut: "var(--color-deep)",
+  deepcut: "var(--color-walleye)",
   rare: "var(--color-rare)",
   uncommon: "var(--color-perch)",
   common: "var(--color-alewife)",
