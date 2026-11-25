@@ -617,7 +617,7 @@ export const TEST_DAILY: Daily = {
               "hssl"
             ],
             "points": 10,
-            "share_pct": 33.9,
+            "share_pct": 33.0,
             "rarity": "Common",
             "golden": false
           },
@@ -629,7 +629,7 @@ export const TEST_DAILY: Daily = {
               "physical sciences library"
             ],
             "points": 10,
-            "share_pct": 16.9,
+            "share_pct": 16.5,
             "rarity": "Common",
             "golden": false
           },
@@ -640,9 +640,9 @@ export const TEST_DAILY: Daily = {
               "gelber",
               "nahum gelber"
             ],
-            "points": 30,
-            "share_pct": 11.3,
-            "rarity": "Uncommon",
+            "points": 10,
+            "share_pct": 11.0,
+            "rarity": "Common",
             "golden": false
           },
           {
@@ -653,7 +653,7 @@ export const TEST_DAILY: Daily = {
               "marvin duchow"
             ],
             "points": 30,
-            "share_pct": 8.5,
+            "share_pct": 8.2,
             "rarity": "Uncommon",
             "golden": false
           },
@@ -664,7 +664,7 @@ export const TEST_DAILY: Daily = {
               "osler library"
             ],
             "points": 30,
-            "share_pct": 6.8,
+            "share_pct": 6.6,
             "rarity": "Uncommon",
             "golden": false
           },
@@ -676,7 +676,7 @@ export const TEST_DAILY: Daily = {
               "mac campus library"
             ],
             "points": 30,
-            "share_pct": 5.6,
+            "share_pct": 5.5,
             "rarity": "Uncommon",
             "golden": false
           },
@@ -687,7 +687,7 @@ export const TEST_DAILY: Daily = {
               "islamic library"
             ],
             "points": 60,
-            "share_pct": 5.1,
+            "share_pct": 4.9,
             "rarity": "Rare",
             "golden": false
           },
@@ -697,7 +697,7 @@ export const TEST_DAILY: Daily = {
               "birks"
             ],
             "points": 60,
-            "share_pct": 4.5,
+            "share_pct": 4.4,
             "rarity": "Rare",
             "golden": false
           },
@@ -708,8 +708,22 @@ export const TEST_DAILY: Daily = {
               "rbsc"
             ],
             "points": 60,
-            "share_pct": 4.0,
+            "share_pct": 3.8,
             "rarity": "Rare",
+            "golden": false
+          },
+          {
+            "names": [
+              "Walter Hitschfeld Geographic Information Centre",
+              "hitschfeld",
+              "walter hitschfeld",
+              "geographic information centre",
+              "gic",
+              "map library"
+            ],
+            "points": 85,
+            "share_pct": 3.3,
+            "rarity": "Deep Cut",
             "golden": false
           },
           {
@@ -720,7 +734,7 @@ export const TEST_DAILY: Daily = {
               "curriculum resources centre"
             ],
             "points": 100,
-            "share_pct": 3.4,
+            "share_pct": 2.7,
             "rarity": "One in a Krillion",
             "golden": true
           }
@@ -739,27 +753,27 @@ export const TEST_DAILY: Daily = {
         "top": [
           {
             "answer": "Humanities and Social Sciences Library",
-            "pct": 33.9
+            "pct": 33.0
           },
           {
             "answer": "Schulich Library of Physical Sciences, Life Sciences, and Engineering",
-            "pct": 16.9
+            "pct": 16.5
           },
           {
             "answer": "Nahum Gelber Law Library",
-            "pct": 11.3
+            "pct": 11.0
           },
           {
             "answer": "Marvin Duchow Music Library",
-            "pct": 8.5
+            "pct": 8.2
           },
           {
             "answer": "Osler Library of the History of Medicine",
-            "pct": 6.8
+            "pct": 6.6
           },
           {
             "answer": "Macdonald Campus Library",
-            "pct": 5.6
+            "pct": 5.5
           }
         ],
         "deep_cuts": [
@@ -768,7 +782,7 @@ export const TEST_DAILY: Daily = {
           "Education Curriculum Resources Centre"
         ],
         "players": 0,
-        "valid_answers": 10
+        "valid_answers": 11
       }
     },
     {
